@@ -9,6 +9,8 @@ module Rspamd
     def ping
       @service.get("/ping")
         .then { |response| response.is_a?(Net::HTTPOK) && response.body == "pong" }
+    rescue Net::OpenTimeout, Net::ReadTimeout, IOError, SystemCallError
+      false
     end
   end
 end

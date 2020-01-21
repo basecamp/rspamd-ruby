@@ -10,8 +10,13 @@ class Rspamd::ClientTest < Minitest::Test
     assert @client.ping
   end
 
-  def test_unsuccessfully_pinging
+  def test_unsuccessfully_pinging_due_to_server_error
     stub_request(:get, "http://localhost:11333/ping").to_return(status: 500)
+    assert !@client.ping
+  end
+
+  def test_unsuccessfully_pinging_due_to_a_timeout
+    stub_request(:get, "http://localhost:11333/ping").to_timeout
     assert !@client.ping
   end
 end
