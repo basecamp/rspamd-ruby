@@ -6,7 +6,7 @@ class Rspamd::ClientTest < Minitest::Test
   end
 
   def test_successfully_pinging
-    stub_request(:get, "http://localhost:11333/ping").to_return(status: 200, body: "pong")
+    stub_request(:get, "http://localhost:11333/ping").to_return(status: 200, body: "pong\r\n")
     assert @client.ping
   end
 
