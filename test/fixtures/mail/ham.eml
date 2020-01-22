@@ -1,0 +1,19 @@
+Date: Tue, 21 Jan 2020 21:04:42 +0000
+From: Alice <alice@example.com>
+To: Bob <bob@example.com>
+Message-ID: <975bad33-2e76-40c3-89aa-7fe1edcbe7ce@example.com>
+Subject: Hello
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Delivered-To: bob@example.com
+
+Hi Bob! Check these out:
+
+    foo.example.com/bar
+    bar.example.com/baz
+    baz.example.com/quux
+
+Best,
+Alice
+alice@example.com

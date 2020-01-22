@@ -1,0 +1,13 @@
+{
+  "is_spam": false,
+  "is_skipped": false,
+  "score": 1.0,
+  "required_score": 15.0,
+  "action": "no action",
+  "urls": [
+    "foo.example.com",
+    "bar.example.com",
+    "baz.example.com"
+  ],
+  "emails": ["alice@example.com"]
+}
