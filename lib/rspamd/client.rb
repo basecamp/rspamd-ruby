@@ -25,6 +25,26 @@ module Rspamd
       end
     end
 
+    def spam!(message)
+      service.post("/learnspam", body: message).then do |response|
+        JSON.parse(response.body).then do |body|
+          unless body["success"]
+            raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
+          end
+        end
+      end
+    end
+
+    def ham!(message)
+      service.post("/learnham", body: message).then do |response|
+        JSON.parse(response.body).then do |body|
+          unless body["success"]
+            raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
+          end
+        end
+      end
+    end
+
     private
       attr_reader :endpoint
 
