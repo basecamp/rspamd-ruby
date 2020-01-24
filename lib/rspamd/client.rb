@@ -4,8 +4,8 @@ require "rspamd/errors"
 
 module Rspamd
   class Client
-    def initialize(scheme: "http", host:)
-      @endpoint = Endpoint.new(scheme: scheme, host: host)
+    def initialize(scheme: "http", host:, port: 11333)
+      @endpoint = Endpoint.new(scheme: scheme, host: host, port: port)
     end
 
     def ping
@@ -28,7 +28,9 @@ module Rspamd
     def spam!(message)
       service.post("/learnspam", body: message).then do |response|
         JSON.parse(response.body).then do |body|
-          unless body["success"]
+          if body["success"]
+            true
+          else
             raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
           end
         end
@@ -38,7 +40,9 @@ module Rspamd
     def ham!(message)
       service.post("/learnham", body: message).then do |response|
         JSON.parse(response.body).then do |body|
-          unless body["success"]
+          if body["success"]
+            true
+          else
             raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
           end
         end

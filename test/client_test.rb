@@ -2,7 +2,7 @@ require "test_helper"
 
 class Rspamd::ClientTest < Minitest::Test
   def setup
-    @client = Rspamd::Client.new(host: "localhost:11333")
+    @client = Rspamd::Client.new(host: "localhost", port: 11333)
   end
 
   def test_successfully_pinging
@@ -49,7 +49,7 @@ class Rspamd::ClientTest < Minitest::Test
       .with(body: mail(:ham))
       .to_return(status: 200, body: '{"success": true}')
 
-    @client.spam!(mail(:ham))
+    assert @client.spam!(mail(:ham))
     assert_requested request
   end
 
@@ -67,7 +67,7 @@ class Rspamd::ClientTest < Minitest::Test
       .with(body: mail(:ham))
       .to_return(status: 200, body: '{"success": true}')
 
-    @client.ham!(mail(:ham))
+    assert @client.ham!(mail(:ham))
     assert_requested request
   end
 
