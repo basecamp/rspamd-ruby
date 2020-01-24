@@ -21,5 +21,9 @@ module Rspamd
     def url_for(path, params = {})
       base.merge(path: path, query: params.to_query).normalize!
     end
+
+    def secure?
+      scheme == "https"
+    end
   end
 end

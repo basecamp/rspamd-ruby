@@ -1,11 +1,14 @@
+require "rspamd/configuration"
 require "rspamd/service"
 require "rspamd/check/result"
 require "rspamd/errors"
 
 module Rspamd
   class Client
-    def initialize(scheme: "http", host:, port: 11333)
-      @endpoint = Endpoint.new(scheme: scheme, host: host, port: port)
+    attr_reader :configuration
+
+    def initialize(**options)
+      @configuration = Configuration.new(**options)
     end
 
     def ping
@@ -50,10 +53,8 @@ module Rspamd
     end
 
     private
-      attr_reader :endpoint
-
       def service
-        @service ||= Service.new(endpoint)
+        @service ||= Service.new(configuration)
       end
   end
 end

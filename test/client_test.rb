@@ -80,6 +80,12 @@ class Rspamd::ClientTest < Minitest::Test
     assert_equal "Unknown statistics error, found when storing data on backend", error.message
   end
 
+  def test_customizing_user_agent
+    stub_request(:get, "http://localhost:11333/ping").to_return(status: 200, body: "pong\r\n")
+    assert Rspamd::Client.new(host: "localhost", port: "11333", user_agent: "Rspamd tests").ping
+    assert_requested :get, "http://localhost:11333/ping", headers: { "User-Agent" => "Rspamd tests" }
+  end
+
   private
     def mail(name)
       fixture "mail/#{name}.eml"
