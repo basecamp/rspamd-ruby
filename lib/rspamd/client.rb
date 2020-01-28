@@ -29,32 +29,28 @@ module Rspamd
     end
 
     def spam!(message)
-      service.post("/learnspam", body: message).then do |response|
-        JSON.parse(response.body).then do |body|
-          if body["success"]
-            true
-          else
-            raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
-          end
-        end
-      end
+      learn :spam, message
     end
 
     def ham!(message)
-      service.post("/learnham", body: message).then do |response|
-        JSON.parse(response.body).then do |body|
-          if body["success"]
-            true
-          else
-            raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
-          end
-        end
-      end
+      learn :ham, message
     end
 
     private
       def service
         @service ||= Service.new(configuration)
+      end
+
+      def learn(classification, message)
+        service.post("/learn#{classification}", body: message).then do |response|
+          JSON.parse(response.body).then do |body|
+            if body["success"]
+              true
+            else
+              raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
+            end
+          end
+        end
       end
   end
 end
