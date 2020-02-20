@@ -42,15 +42,15 @@ module Rspamd
       end
 
       def learn(classification, message)
-        service.post("/learn#{classification}", body: message).then do |response|
-          JSON.parse(response.body).then do |body|
+        service.post("/learn#{classification}", body: message)
+          .then { |response| JSON.parse(response.body) }
+          .then do |body|
             if body["success"]
               true
             else
-              raise LearningFailed, body["error"].presence || "Received unspecified error from Rspamd"
+              raise LearningFailed, body["error"] || "Received unspecified error from Rspamd"
             end
           end
-        end
       end
   end
 end

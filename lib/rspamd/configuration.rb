@@ -18,10 +18,6 @@ module Rspamd
       options[:port] || 11333
     end
 
-    def endpoint
-      @endpoint ||= Endpoint.new(scheme: scheme, host: host, port: port)
-    end
-
 
     def open_timeout
       options[:open_timeout]
