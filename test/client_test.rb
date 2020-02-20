@@ -80,6 +80,15 @@ class Rspamd::ClientTest < Minitest::Test
     assert_equal "Unknown statistics error, found when storing data on backend", error.message
   end
 
+  def test_reporting_a_previously_reported_message_as_spam
+    request = stub_request(:post, "http://localhost:11333/learnspam")
+      .with(body: mail(:ham))
+      .to_return(status: 208, body: response("already_reported.json"))
+
+    assert !@client.spam!(mail(:ham))
+    assert_requested request
+  end
+
   def test_customizing_user_agent
     stub_request(:get, "http://localhost:11333/ping").to_return(status: 200, body: "pong\r\n")
     assert Rspamd::Client.new(host: "localhost", port: "11333", user_agent: "Rspamd tests").ping
