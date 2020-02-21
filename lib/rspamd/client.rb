@@ -43,14 +43,13 @@ module Rspamd
 
       def learn(classification, message)
         service.post("/learn#{classification}", body: message).then do |response|
-          JSON.parse(response.body).then do |body|
-            if body["success"]
-              true
-            elsif response.is_a?(Net::HTTPAlreadyReported)
-              false
-            else
-              raise LearningFailed, body["error"] || "Received unspecified error from Rspamd"
-            end
+          case response
+          when Net::HTTPOK
+            JSON.parse(response.body).fetch("success")
+          when Net::HTTPNoContent, Net::HTTPAlreadyReported
+            false
+          else
+            raise LearningFailed, JSON.parse(response.body)["error"] || "Received unspecified error from Rspamd"
           end
         end
       end
