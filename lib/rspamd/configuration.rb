@@ -20,11 +20,11 @@ module Rspamd
 
 
     def open_timeout
-      options[:open_timeout]
+      options[:open_timeout] || 1
     end
 
     def read_timeout
-      options[:read_timeout]
+      options[:read_timeout] || 10
     end
 
 
