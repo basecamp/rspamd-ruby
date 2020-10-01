@@ -12,7 +12,7 @@ module Rspamd
       end
 
       def spam?
-        data.fetch("is_spam")
+        action == "add header"
       end
 
       def ham?
