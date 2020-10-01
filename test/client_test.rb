@@ -35,6 +35,21 @@ class Rspamd::ClientTest < Minitest::Test
     assert_equal %w[ alice@example.com ], result.emails
   end
 
+  def test_successfully_checking_a_spam_message
+    stub_request(:post, "http://localhost:11333/checkv2")
+        .with(body: mail(:ham))
+        .to_return(status: 200, body: response("spam.json"))
+
+    result = @client.check(mail(:ham))
+    assert result.spam?
+    assert !result.ham?
+    assert_equal 17.8, result.score
+    assert_equal 6.0, result.required_score
+    assert_equal "add header", result.action
+    assert_equal [], result.urls
+    assert_equal [], result.emails
+  end
+
   def test_unsuccessfully_checking_a_message_due_to_a_server_error
     stub_request(:post, "http://localhost:11333/checkv2")
       .with(body: mail(:ham))
