@@ -12,7 +12,7 @@ module Rspamd
       end
 
       def spam?
-        action == "add header"
+        score >= required_score
       end
 
       def ham?
