@@ -59,6 +59,15 @@ class Rspamd::ClientTest < Minitest::Test
     assert_equal "Received invalid response from Rspamd: expected 200 OK, got 500 Internal Server Error", error.message
   end
 
+  def test_providing_headers_on_check
+    request = stub_request(:post, "http://localhost:11333/checkv2")
+        .with(body: mail(:ham), headers: { "Settings-Id" => "outbound" })
+        .to_return(status: 200, body: response("spam.json"))
+
+    @client.check(mail(:ham), headers: { "Settings-Id" => "outbound" })
+    assert_requested request
+  end
+
   def test_successfully_reporting_a_message_as_spam
     request = stub_request(:post, "http://localhost:11333/learnspam")
       .with(body: mail(:ham))

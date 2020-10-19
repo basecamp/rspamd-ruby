@@ -18,8 +18,8 @@ module Rspamd
       false
     end
 
-    def check(message)
-      service.post("/checkv2", body: message).then do |response|
+    def check(message, headers: {})
+      service.post("/checkv2", headers: headers, body: message).then do |response|
         if response.is_a?(Net::HTTPOK)
           Check::Result.parse(response.body)
         else
