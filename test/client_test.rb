@@ -82,7 +82,7 @@ class Rspamd::ClientTest < Minitest::Test
       .with(body: mail(:ham))
       .to_return(status: 500, body: '{"error": "Unknown statistics error, found when storing data on backend"}')
 
-    error = assert_raises(Rspamd::LearningFailed) { @client.spam!(mail(:ham)) }
+    error = assert_raises(Rspamd::Error) { @client.spam!(mail(:ham)) }
     assert_equal "Unknown statistics error, found when storing data on backend", error.message
   end
 
@@ -118,7 +118,7 @@ class Rspamd::ClientTest < Minitest::Test
       .with(body: mail(:ham))
       .to_return(status: 500, body: '{"error": "Unknown statistics error, found when storing data on backend"}')
 
-    error = assert_raises(Rspamd::LearningFailed) { @client.ham!(mail(:ham)) }
+    error = assert_raises(Rspamd::Error) { @client.ham!(mail(:ham)) }
     assert_equal "Unknown statistics error, found when storing data on backend", error.message
   end
 

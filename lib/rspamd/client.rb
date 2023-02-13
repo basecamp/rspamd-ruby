@@ -61,7 +61,7 @@ module Rspamd
           when Net::HTTPNoContent, Net::HTTPAlreadyReported
             false
           else
-            raise LearningFailed, JSON.parse(response.body)["error"] || "Received unspecified error from Rspamd"
+            raise Rspamd::Error, JSON.parse(response.body)["error"] || "Received unspecified error from Rspamd"
           end
         end
       end
