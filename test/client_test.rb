@@ -95,6 +95,24 @@ class Rspamd::ClientTest < Minitest::Test
     assert_requested request
   end
 
+  def test_successfully_adding_a_message_to_fuzzy_storage
+    request = stub_request(:post, "http://localhost:11333/fuzzyadd")
+      .with(body: mail(:ham))
+      .to_return(status: 200, body: '{"success": true}')
+
+    assert @client.add_fuzzy(mail(:ham))
+    assert_requested request
+  end
+
+  def test_successfully_deleting_a_message_from_fuzzy_storage
+    request = stub_request(:post, "http://localhost:11333/fuzzydel")
+      .with(body: mail(:ham))
+      .to_return(status: 200, body: '{"success": true}')
+
+    assert @client.delete_fuzzy(mail(:ham))
+    assert_requested request
+  end
+
   def test_unsuccessfully_reporting_a_message_as_ham
     stub_request(:post, "http://localhost:11333/learnham")
       .with(body: mail(:ham))

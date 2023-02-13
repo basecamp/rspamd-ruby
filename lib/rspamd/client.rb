@@ -36,13 +36,25 @@ module Rspamd
       learn :ham, message
     end
 
+    def add_fuzzy(message, flag: 1, weight: 1)
+      post("/fuzzyadd", message, "Flag" => flag, "Weight" => weight)
+    end
+
+    def delete_fuzzy(message, flag: 1)
+      post("/fuzzydel", message, "Flag" => flag)
+    end
+
     private
       def service
         @service ||= Service.new(configuration)
       end
 
       def learn(classification, message)
-        service.post("/learn#{classification}", body: message).then do |response|
+        post("/learn#{classification}", message)
+      end
+
+      def post(endpoint, body, **headers)
+        service.post(endpoint, body: body, headers: headers).then do |response|
           case response
           when Net::HTTPOK
             JSON.parse(response.body).fetch("success")
