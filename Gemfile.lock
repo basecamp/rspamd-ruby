@@ -1,3 +1,14 @@
+GIT
+  remote: https://github.com/basecamp/house-style.git
+  revision: b3ad65254828e8e8019a0d9a6205aff9ad206a77
+  branch: main
+  specs:
+    rubocop-37signals (1.0.0)
+      rubocop
+      rubocop-minitest
+      rubocop-performance
+      rubocop-rails
+
 PATH
   remote: .
   specs:
@@ -6,16 +17,65 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (7.0.4.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    byebug (9.1.0)
+    ast (2.4.2)
+    concurrent-ruby (1.2.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    debug (1.7.1)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     hashdiff (1.0.0)
-    minitest (5.14.0)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
+    io-console (0.6.0)
+    irb (1.6.2)
+      reline (>= 0.3.0)
+    json (2.6.3)
+    minitest (5.17.0)
+    parallel (1.22.1)
+    parser (3.2.1.0)
+      ast (~> 2.4.1)
     public_suffix (5.0.0)
+    rack (3.0.4.1)
+    rainbow (3.1.1)
     rake (13.0.1)
+    regexp_parser (2.7.0)
+    reline (0.3.2)
+      io-console (~> 0.5)
+    rexml (3.2.5)
+    rubocop (1.45.1)
+      json (~> 2.3)
+      parallel (~> 1.10)
+      parser (>= 3.2.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.24.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.26.0)
+      parser (>= 3.2.1.0)
+    rubocop-minitest (0.27.0)
+      rubocop (>= 0.90, < 2.0)
+    rubocop-performance (1.16.0)
+      rubocop (>= 1.7.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.17.4)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+    ruby-progressbar (1.11.0)
     safe_yaml (1.0.5)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+    unicode-display_width (2.4.2)
     webmock (3.8.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -25,10 +85,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug (~> 9.1)
-  minitest (~> 5.11)
+  debug
+  minitest (> 5.11)
   rake (~> 13.0)
   rspamd!
+  rubocop-37signals!
   webmock (~> 3.0)
 
 BUNDLED WITH

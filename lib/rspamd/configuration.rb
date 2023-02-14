@@ -31,5 +31,9 @@ module Rspamd
     def user_agent
       options[:user_agent] || "rspamd-ruby"
     end
+
+    def password
+      options[:password]
+    end
   end
 end

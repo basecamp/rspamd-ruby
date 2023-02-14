@@ -82,7 +82,7 @@ class Rspamd::ClientTest < Minitest::Test
       .with(body: mail(:ham))
       .to_return(status: 500, body: '{"error": "Unknown statistics error, found when storing data on backend"}')
 
-    error = assert_raises(Rspamd::LearningFailed) { @client.spam!(mail(:ham)) }
+    error = assert_raises(Rspamd::Error) { @client.spam!(mail(:ham)) }
     assert_equal "Unknown statistics error, found when storing data on backend", error.message
   end
 
@@ -95,12 +95,30 @@ class Rspamd::ClientTest < Minitest::Test
     assert_requested request
   end
 
+  def test_successfully_adding_a_message_to_fuzzy_storage
+    request = stub_request(:post, "http://localhost:11333/fuzzyadd")
+      .with(body: mail(:ham))
+      .to_return(status: 200, body: '{"success": true}')
+
+    assert @client.add_fuzzy(mail(:ham))
+    assert_requested request
+  end
+
+  def test_successfully_deleting_a_message_from_fuzzy_storage
+    request = stub_request(:post, "http://localhost:11333/fuzzydel")
+      .with(body: mail(:ham))
+      .to_return(status: 200, body: '{"success": true}')
+
+    assert @client.delete_fuzzy(mail(:ham))
+    assert_requested request
+  end
+
   def test_unsuccessfully_reporting_a_message_as_ham
     stub_request(:post, "http://localhost:11333/learnham")
       .with(body: mail(:ham))
       .to_return(status: 500, body: '{"error": "Unknown statistics error, found when storing data on backend"}')
 
-    error = assert_raises(Rspamd::LearningFailed) { @client.ham!(mail(:ham)) }
+    error = assert_raises(Rspamd::Error) { @client.ham!(mail(:ham)) }
     assert_equal "Unknown statistics error, found when storing data on backend", error.message
   end
 
