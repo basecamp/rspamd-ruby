@@ -97,7 +97,7 @@ MIME
 
 ## Acknowledgments
 
-rspamd-ruby is [MIT-licensed](LICENSE.md) open-source software from [37signals](https://37signals.com/), the creators of [Ruby on Rails](https://rubyonrails.org).
+rspamd-ruby is [MIT-licensed](MIT-LICENSE) open-source software from [37signals](https://37signals.com/), the creators of [Ruby on Rails](https://rubyonrails.org).
 
 ---
 
