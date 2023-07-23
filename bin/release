@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+VERSION=$1
+
+printf "module Rspamd\n  VERSION = \"$VERSION\"\nend\n" > ./lib/rspamd/version.rb
+bundle
+git add Gemfile.lock lib/rspamd/version.rb
+git commit -m "Bump version for $VERSION"
+git push
+git tag v$VERSION
+git push --tags
+gem build rspamd-ruby.gemspec
+gem push "rspamd-ruby-$VERSION.gem" --host https://rubygems.org
+rm "rspamd-ruby-$VERSION.gem"

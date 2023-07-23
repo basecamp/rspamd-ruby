@@ -12,16 +12,17 @@ GIT
 PATH
   remote: .
   specs:
-    rspamd (0.1.0)
+    rspamd-ruby (1.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.4.2)
+    activesupport (6.1.7.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+      zeitwerk (~> 2.3)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
@@ -67,7 +68,7 @@ GEM
     rubocop-performance (1.16.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.17.4)
+    rubocop-rails (2.19.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
@@ -80,6 +81,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
+    zeitwerk (2.6.8)
 
 PLATFORMS
   ruby
@@ -88,9 +90,9 @@ DEPENDENCIES
   debug
   minitest (> 5.11)
   rake (~> 13.0)
-  rspamd!
+  rspamd-ruby!
   rubocop-37signals!
   webmock (~> 3.0)
 
 BUNDLED WITH
-   2.1.4
+   2.4.17
