@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary  = "Client for Rspamd's HTTP API"
   s.homepage = "https://github.com/basecamp/rspamd-ruby"
 
-  s.required_ruby_version = ">= 2.6.0"
+  s.required_ruby_version = ">= 2.7.8"
 
   s.add_development_dependency "rake",     "~> 13.0"
   s.add_development_dependency "minitest", "> 5.11"
