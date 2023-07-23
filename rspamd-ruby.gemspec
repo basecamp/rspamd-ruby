@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
-  s.name     = "rspamd"
-  s.version  = "0.1.0"
-  s.authors  = "George Claghorn"
-  s.email    = "george@basecamp.com"
+  s.name     = "rspamd-ruby"
+  s.version  = "1.0.0"
+  s.authors  = [ "George Claghorn", "Lewis Buckley" ]
+  s.email    = "lewis@37signals.com"
   s.summary  = "Client for Rspamd's HTTP API"
   s.homepage = "https://github.com/basecamp/rspamd-ruby"
 
