@@ -1,6 +1,8 @@
+require_relative "lib/rspamd/version"
+
 Gem::Specification.new do |s|
   s.name     = "rspamd-ruby"
-  s.version  = "1.0.0"
+  s.version  = Rspamd::VERSION
   s.authors  = [ "George Claghorn", "Lewis Buckley" ]
   s.email    = "lewis@37signals.com"
   s.summary  = "Client for Rspamd's HTTP API"
