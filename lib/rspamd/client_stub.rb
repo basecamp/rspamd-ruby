@@ -1,3 +1,5 @@
+require "rspamd/check/result"
+
 module Rspamd
   class ClientStub
     HAM_RESULT = Check::Result.new(

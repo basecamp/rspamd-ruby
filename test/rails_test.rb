@@ -48,8 +48,8 @@ class Rspamd::RailsTest < Minitest::Test
     assert_instance_of Rspamd::ClientStub, client
   end
 
-  def test_accepts_string_keys
-    Rspamd::Rails.setup("enabled" => true, "outbound" => { "host" => "localhost", "port" => 11334 })
+  def test_accepts_symbol_keys
+    Rspamd::Rails.setup(enabled: true, outbound: { host: "localhost", port: 11334 })
 
     client = Rspamd::Rails.client_for(:outbound)
     assert_instance_of Rspamd::Client, client
