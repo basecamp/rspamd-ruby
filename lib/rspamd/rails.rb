@@ -11,9 +11,7 @@ module Rspamd
       end
 
       def client_for(name)
-        return ClientStub.new unless enabled?
-
-        @clients[name] ||= build_client(name)
+        clients[name] ||= enabled? ? build_client(name) : ClientStub.new
       end
 
       def reset!
@@ -22,6 +20,10 @@ module Rspamd
       end
 
       private
+        def clients
+          @clients ||= {}
+        end
+
         def enabled?
           @config&.dig(:enabled)
         end
