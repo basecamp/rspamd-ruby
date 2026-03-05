@@ -5,23 +5,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.8
-          rubygems: latest
-
-      - name: Cache gem dependencies
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-bundler-
-
-      - name: Install dependencies
-        run: gem install bundler && bundle install --jobs 4 --retry 3 --path vendor/bundle
+          ruby-version: 3.2
+          bundler-cache: true
 
       - name: Run tests
         run: bundle exec rake test
