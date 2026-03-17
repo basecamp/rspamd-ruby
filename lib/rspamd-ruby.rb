@@ -7,7 +7,7 @@ require "rspamd/railtie" if defined?(::Rails::Railtie)
 module Rspamd
   class << self
     def setup(config)
-      @config = config.deep_symbolize_keys
+      @config = config&.deep_symbolize_keys
       @clients = {}
     end
 
