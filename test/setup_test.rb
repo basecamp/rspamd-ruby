@@ -27,6 +27,13 @@ class Rspamd::SetupTest < Minitest::Test
     assert_same client1, client2
   end
 
+  def test_returns_stub_when_config_is_nil
+    Rspamd.setup(nil)
+
+    client = Rspamd.client_for(:outbound)
+    assert_instance_of Rspamd::ClientStub, client
+  end
+
   def test_returns_stub_when_not_configured
     client = Rspamd.client_for(:outbound)
     assert_instance_of Rspamd::ClientStub, client
